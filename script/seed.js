@@ -2,17 +2,68 @@
 
 const db = require('../server/db')
 const {User} = require('../server/db/models')
+const {Dish} = require('../server/db/models')
+const {Ingredient} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
   const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({
+      email: 'cody@email.com',
+      password: '123',
+      name: 'Cody',
+      sex: 'male',
+      dietaryPreference: 'vegan'
+    }),
+    User.create({
+      email: 'murphy@email.com',
+      password: '123',
+      name: 'Murphy',
+      sex: 'male',
+      dietaryPreference: 'keto'
+    })
   ])
 
+  const dishes = await Promise.all([
+    Dish.create({
+      name: 'Taco',
+      dietaryType: ['dairy-free'],
+      mealType: ['lunch', 'dinner'],
+      nutrition: 'insert nutrition info here'
+    }),
+    Dish.create({
+      name: 'Chia Seed Pudding',
+      dietaryType: ['dairy-free', 'gluten-free', 'vegan'],
+      mealType: ['breakfast'],
+      nutrition: 'insert nutrition info here'
+    })
+  ])
+
+  const ingredients = await Promise.all([
+    Ingredient.create({
+      name: 'Soy Milk',
+      dietType: ['dairy-free', 'gluten-free', 'vegan', 'vegetarian'],
+      nutrition: 'insert nutrition info here',
+      portionSize: ['1', 'cup']
+    }),
+    Ingredient.create({
+      name: 'Chia Seeds',
+      dietType: ['dairy-free', 'gluten-free', 'vegan', 'vegetarian'],
+      foodType: ['seed'],
+      nutrition: 'insert nutrition info here',
+      portionSize: ['4', 'tbsp']
+    })
+  ])
+
+  await dishes[1].addIngredient(ingredients[0])
+  await dishes[1].addIngredient(ingredients[1])
+  await users[0].addDish(dishes[1])
+
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${dishes.length} dishes`)
+  console.log(`seeded ${ingredients.length} ingredients`)
   console.log(`seeded successfully`)
 }
 
