@@ -64,7 +64,7 @@ router.delete('/:id', adminOrUser, async (req, res, next) => {
     const user = await User.findByPk(req.params.id)
     if (user) {
       await user.destroy()
-      res.sendStatus(200)
+      res.sendStatus(200).send('User deleted.')
     } else {
       res.status(404).send('User not found.')
     }
