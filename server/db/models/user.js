@@ -10,22 +10,53 @@ const User = db.define('user', {
   },
   password: {
     type: Sequelize.STRING,
-    // Making `.password` act like a func hides it when serializing to JSON.
-    // This is a hack to get around Sequelize's lack of a "private" option.
     get() {
       return () => this.getDataValue('password')
     }
   },
   salt: {
     type: Sequelize.STRING,
-    // Making `.salt` act like a function hides it when serializing to JSON.
-    // This is a hack to get around Sequelize's lack of a "private" option.
     get() {
       return () => this.getDataValue('salt')
     }
   },
   googleId: {
     type: Sequelize.STRING
+  },
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  sex: {
+    type: Sequelize.ENUM(['female', 'male', 'prefer-not-to-say']),
+    allowNull: false
+  },
+  dietaryPreference: {
+    type: Sequelize.ENUM([
+      'vegetarian',
+      'vegan',
+      'gluten-free',
+      'dairy-free',
+      'paleo',
+      'keto',
+      'pescatarian'
+    ])
+  },
+  birthdate: {
+    type: Sequelize.DATE
+  },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
+  height: {
+    type: Sequelize.INTEGER
+  },
+  weight: {
+    type: Sequelize.INTEGER
+  },
+  nutritionStatus: {
+    type: Sequelize.TEXT
   }
 })
 
