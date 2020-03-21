@@ -40,6 +40,9 @@ const Dish = db.define('dish', {
   totalFat: {
     type: Sequelize.ARRAY(Sequelize.STRING)
   },
+  totalIron: {
+    type: Sequelize.ARRAY(Sequelize.STRING)
+  },
   totalFolateEquivalent: {
     type: Sequelize.ARRAY(Sequelize.STRING)
   },

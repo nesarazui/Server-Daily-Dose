@@ -43,6 +43,9 @@ const Ingredient = db.define('ingredients', {
   totalFat: {
     type: Sequelize.ARRAY(Sequelize.STRING)
   },
+  totalIron: {
+    type: Sequelize.ARRAY(Sequelize.STRING)
+  },
   totalFolateEquivalent: {
     type: Sequelize.ARRAY(Sequelize.STRING)
   },
