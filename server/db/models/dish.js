@@ -2,158 +2,126 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Dish = db.define('dish', {
-  name: {
+  dishName: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  dietLabels: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  imageUrl: {
+    type: Sequelize.STRING,
+    allowNull: false
   },
-  cautions: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
-  },
-  mealType: {
+  mealTypes: {
     type: Sequelize.ARRAY(Sequelize.STRING),
     allowNull: false
   },
   healthLabels: {
     type: Sequelize.ARRAY(Sequelize.STRING)
   },
-  totalEnergy: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  CHOCDF_KCAL: {
+    type: Sequelize.INTEGER
   },
-  totalCalcium: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  FAT_KCAL: {
+    type: Sequelize.INTEGER
   },
-  totalCarbs: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  PROCNT_KCAL: {
+    type: Sequelize.INTEGER
   },
-  totalMonounsaturated: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  ENERC_KCAL: {
+    type: Sequelize.INTEGER
   },
-  totalPolyunsaturated: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  CA: {
+    type: Sequelize.INTEGER
   },
-  totalSaturated: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  CHOCDF: {
+    type: Sequelize.INTEGER
   },
-  totalFat: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  FAMS: {
+    type: Sequelize.INTEGER
   },
-  totalIron: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  FAPU: {
+    type: Sequelize.INTEGER
   },
-  totalFolateEquivalent: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  FASAT: {
+    type: Sequelize.INTEGER
   },
-  totalFolateFood: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  FAT: {
+    type: Sequelize.INTEGER
   },
-  totalPotassium: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  FE: {
+    type: Sequelize.INTEGER
   },
-  totalMagnesium: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  FOLDFE: {
+    type: Sequelize.INTEGER
   },
-  totalSodium: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  FOLFD: {
+    type: Sequelize.INTEGER
   },
-  totalNiacin: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  K: {
+    type: Sequelize.INTEGER
   },
-  totalPhosphorus: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  MG: {
+    type: Sequelize.INTEGER
   },
-  totalProtein: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  NA: {
+    type: Sequelize.INTEGER
   },
-  totalRiboflavin: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  NIA: {
+    type: Sequelize.INTEGER
   },
-  totalThiamin: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  P: {
+    type: Sequelize.INTEGER
   },
-  totalVitaminB6: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  PROCNT: {
+    type: Sequelize.INTEGER
   },
-  totalWater: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  RIBF: {
+    type: Sequelize.INTEGER
   },
-  totalZinc: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  THIA: {
+    type: Sequelize.INTEGER
   },
-  calFromCarb: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  VITB6A: {
+    type: Sequelize.INTEGER
   },
-  calFromFat: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  WATER: {
+    type: Sequelize.INTEGER
   },
-  calFromProtein: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  ZN: {
+    type: Sequelize.INTEGER
   },
-  percentCalcium: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  cholesterol: {
+    type: Sequelize.INTEGER
   },
-  percentCarbs: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  transfat: {
+    type: Sequelize.INTEGER
   },
-  percentEngergy: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  fiber: {
+    type: Sequelize.INTEGER
   },
-  percentSaturated: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  folicAcid: {
+    type: Sequelize.INTEGER
   },
-  percentFat: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  sugar: {
+    type: Sequelize.INTEGER
   },
-  percentIron: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  vitaminE: {
+    type: Sequelize.INTEGER
   },
-  percentFolateEquivalent: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  vitaminA: {
+    type: Sequelize.INTEGER
   },
-  percentPotassium: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  vitaminB12: {
+    type: Sequelize.INTEGER
   },
-  percentMagnesium: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  vitaminC: {
+    type: Sequelize.INTEGER
   },
-  percentSodium: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  vitaminD: {
+    type: Sequelize.INTEGER
   },
-  percentNiacin: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
-  },
-  percentPhosphorus: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
-  },
-  percentProtein: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
-  },
-  percentRiboflavin: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
-  },
-  percentThiamin: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
-  },
-  percentVitaminB6: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
-  },
-  percentZinc: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+  vitaminK: {
+    type: Sequelize.INTEGER
   }
 })
-
-// create hook that before save:
-// you find the ingredients associated with this meal
-// add up all their nutrition values
-// and that becomes the nutrition data for the dish
-
-// const setNutrition = dish => {
-
-// }
-
-// Dish.beforeCreate(setNutrition)
-// Dish.beforeUpdate(setNutrition)
 
 module.exports = Dish
