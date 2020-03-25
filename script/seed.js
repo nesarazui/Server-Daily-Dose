@@ -59,10 +59,10 @@ async function seed() {
     })
   ])
 
-  await dishes[1].addIngredient(ingredients[0])
-  await dishes[1].addIngredient(ingredients[1])
-  //await order.addProduct(sampleProduct, {through: {quantity: 6}})
-  await users[0].addDish(dishes[1], {through: {mealTypes: 'breakfast'}})
+  // await dishes[1].addIngredient(ingredients[0])
+  // await dishes[1].addIngredient(ingredients[1])
+  // //await order.addProduct(sampleProduct, {through: {quantity: 6}})
+  // await users[0].addDish(dishes[1], {through: {mealTypes: 'breakfast'}})
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${dishes.length} dishes`)
