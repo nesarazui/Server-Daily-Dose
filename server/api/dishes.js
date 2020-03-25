@@ -4,11 +4,93 @@ module.exports = router
 
 router.put('/:id', async (req, res, next) => {
   try {
-    const {name, dietType, mealType, nutrition} = req.body
+    const {
+      name,
+      imgUrl,
+      healthLabels,
+      CHOCDF_KCAL,
+      FAT_KCAL,
+      PROCNT_KCAL,
+      calories,
+      FAT,
+      FASAT,
+      FAMS,
+      FAPU,
+      CHOCDF,
+      FIBTG,
+      SUGAR,
+      PROCNT,
+      NA,
+      CA,
+      MG,
+      K,
+      FE,
+      ZN,
+      P,
+      VITC,
+      THIA,
+      RIBF,
+      NIA,
+      VITB6A,
+      FOLDFE,
+      FOLFD,
+      TOCPHA,
+      WATER,
+      ENERC_KCAL,
+      CHOLE,
+      FATRN,
+      FOLAC,
+      VITA_RAE,
+      VITB12,
+      VITD,
+      VITK1
+    } = req.body
     const dish = await Dish.findByPk(req.params.id)
     if (dish) {
-      await dish.update({name, dietType, mealType, nutrition})
-      res.status(200).json(dish)
+      let updatedDish = await dish.update({
+        name,
+        imgUrl,
+        healthLabels,
+        CHOCDF_KCAL,
+        FAT_KCAL,
+        PROCNT_KCAL,
+        calories,
+        FAT,
+        FASAT,
+        FAMS,
+        FAPU,
+        CHOCDF,
+        FIBTG,
+        SUGAR,
+        PROCNT,
+        NA,
+        CA,
+        MG,
+        K,
+        FE,
+        ZN,
+        P,
+        VITC,
+        THIA,
+        RIBF,
+        NIA,
+        VITB6A,
+        FOLDFE,
+        FOLFD,
+        TOCPHA,
+        WATER,
+        ENERC_KCAL,
+        CHOLE,
+        FATRN,
+        FOLAC,
+        VITA_RAE,
+        VITB12,
+        VITD,
+        VITK1
+      })
+      if (updatedDish) {
+        res.status(200).json(updatedDish)
+      }
     } else {
       res.status(404).send('Dish not found.')
     }
@@ -33,14 +115,90 @@ router.delete('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const {name, dietType, mealType, nutrition} = req.body
+    const {
+      name,
+      imgUrl,
+      healthLabels,
+      CHOCDF_KCAL,
+      FAT_KCAL,
+      PROCNT_KCAL,
+      calories,
+      FAT,
+      FASAT,
+      FAMS,
+      FAPU,
+      CHOCDF,
+      FIBTG,
+      SUGAR,
+      PROCNT,
+      NA,
+      CA,
+      MG,
+      K,
+      FE,
+      ZN,
+      P,
+      VITC,
+      THIA,
+      RIBF,
+      NIA,
+      VITB6A,
+      FOLDFE,
+      FOLFD,
+      TOCPHA,
+      WATER,
+      ENERC_KCAL,
+      CHOLE,
+      FATRN,
+      FOLAC,
+      VITA_RAE,
+      VITB12,
+      VITD,
+      VITK1
+    } = req.body
     const newDish = await Dish.create({
       name,
-      dietType,
-      mealType,
-      nutrition
+      imgUrl,
+      healthLabels,
+      CHOCDF_KCAL,
+      FAT_KCAL,
+      PROCNT_KCAL,
+      calories,
+      FAT,
+      FASAT,
+      FAMS,
+      FAPU,
+      CHOCDF,
+      FIBTG,
+      SUGAR,
+      PROCNT,
+      NA,
+      CA,
+      MG,
+      K,
+      FE,
+      ZN,
+      P,
+      VITC,
+      THIA,
+      RIBF,
+      NIA,
+      VITB6A,
+      FOLDFE,
+      FOLFD,
+      TOCPHA,
+      WATER,
+      ENERC_KCAL,
+      CHOLE,
+      FATRN,
+      FOLAC,
+      VITA_RAE,
+      VITB12,
+      VITD,
+      VITK1
     })
     if (newDish) {
+      console.log('oh yeah i made it', newDish)
       res.status(201).json(newDish)
     } else {
       res.status(404).send('Could not create new dish.')
