@@ -9,9 +9,12 @@ const UserDish = db.define('userDish', {
     primaryKey: true,
     autoIncrement: true
   },
-  mealType: {
+  mealTypes: {
     type: Sequelize.ENUM(['breakfast', 'lunch', 'dinner']),
     allowNull: false
+  },
+  date: {
+    type: Sequelize.DATEONLY
   }
 })
 

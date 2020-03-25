@@ -28,17 +28,17 @@ async function seed() {
 
   const dishes = await Promise.all([
     Dish.create({
-      dishName: 'Taco', //
+      name: 'Taco', //
       dietaryType: ['dairy-free'],
-      imageUrl: '', //
-      mealTypes: ['lunch', 'dinner'], //
+      imgUrl: '', //
+      mealTypes: 'lunch', //
       nutrition: 'insert nutrition info here'
     }),
     Dish.create({
-      dishName: 'Chia Seed Pudding', //
+      name: 'Chia Seed Pudding', //
       dietaryType: ['dairy-free', 'gluten-free', 'vegan'],
-      imageUrl: '', //
-      mealTypes: ['breakfast'], //
+      imgUrl: '', //
+      mealTypes: 'breakfast', //
       nutrition: 'insert nutrition info here'
     })
   ])
@@ -61,7 +61,8 @@ async function seed() {
 
   await dishes[1].addIngredient(ingredients[0])
   await dishes[1].addIngredient(ingredients[1])
-  await users[0].addDish(dishes[1])
+  //await order.addProduct(sampleProduct, {through: {quantity: 6}})
+  await users[0].addDish(dishes[1], {through: {mealTypes: 'breakfast'}})
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${dishes.length} dishes`)
