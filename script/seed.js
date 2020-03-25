@@ -28,38 +28,41 @@ async function seed() {
 
   const dishes = await Promise.all([
     Dish.create({
-      name: 'Taco',
+      name: 'Taco', //
       dietaryType: ['dairy-free'],
-      mealType: ['lunch', 'dinner'],
+      imgUrl: '', //
+      mealTypes: 'lunch', //
       nutrition: 'insert nutrition info here'
     }),
     Dish.create({
-      name: 'Chia Seed Pudding',
+      name: 'Chia Seed Pudding', //
       dietaryType: ['dairy-free', 'gluten-free', 'vegan'],
-      mealType: ['breakfast'],
+      imgUrl: '', //
+      mealTypes: 'breakfast', //
       nutrition: 'insert nutrition info here'
     })
   ])
 
   const ingredients = await Promise.all([
     Ingredient.create({
-      name: 'Soy Milk',
+      ingredientName: 'Soy Milk', //
       dietType: ['dairy-free', 'gluten-free', 'vegan', 'vegetarian'],
       nutrition: 'insert nutrition info here',
-      portionSize: ['1', 'cup']
+      portionSize: '1 cup' //['1', 'cup']
     }),
     Ingredient.create({
-      name: 'Chia Seeds',
+      ingredientName: 'Chia Seeds', //
       dietType: ['dairy-free', 'gluten-free', 'vegan', 'vegetarian'],
       foodType: ['seed'],
       nutrition: 'insert nutrition info here',
-      portionSize: ['4', 'tbsp']
+      portionSize: '4 tbsp' //['4', 'tbsp']
     })
   ])
 
-  await dishes[1].addIngredient(ingredients[0])
-  await dishes[1].addIngredient(ingredients[1])
-  await users[0].addDish(dishes[1])
+  // await dishes[1].addIngredient(ingredients[0])
+  // await dishes[1].addIngredient(ingredients[1])
+  // //await order.addProduct(sampleProduct, {through: {quantity: 6}})
+  // await users[0].addDish(dishes[1], {through: {mealTypes: 'breakfast'}})
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${dishes.length} dishes`)

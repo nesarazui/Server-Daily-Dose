@@ -2,16 +2,16 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Dish = db.define('dish', {
-  dishName: {
+  name: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  imageUrl: {
+  imgUrl: {
     type: Sequelize.STRING,
     allowNull: false
   },
   mealTypes: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
+    type: Sequelize.ENUM(['breakfast', 'lunch', 'dinner']),
     allowNull: false
   },
   healthLabels: {
