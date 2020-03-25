@@ -139,6 +139,7 @@ router.post('/', async (req, res, next) => {
     const {
       name,
       imgUrl,
+      mealType,
       healthLabels,
       CHOCDF_KCAL,
       FAT_KCAL,
@@ -180,6 +181,7 @@ router.post('/', async (req, res, next) => {
     const newDish = await Dish.create({
       name,
       imgUrl,
+      mealType,
       healthLabels,
       CHOCDF_KCAL,
       FAT_KCAL,

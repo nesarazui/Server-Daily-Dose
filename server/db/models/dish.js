@@ -10,10 +10,10 @@ const Dish = db.define('dish', {
     type: Sequelize.TEXT
     // allowNull: false
   },
-  // mealTypes: {
-  //   type: Sequelize.ENUM(['breakfast', 'lunch', 'dinner'])
-  //   // allowNull: false
-  // },
+  mealType: {
+    type: Sequelize.ENUM(['Breakfast', 'Lunch', 'Dinner', 'Snack'])
+    // allowNull: false
+  },
   healthLabels: {
     type: Sequelize.ARRAY(Sequelize.STRING)
   },
