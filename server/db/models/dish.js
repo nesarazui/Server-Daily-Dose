@@ -7,120 +7,123 @@ const Dish = db.define('dish', {
     allowNull: false
   },
   imgUrl: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.TEXT
+    // allowNull: false
   },
-  mealTypes: {
-    type: Sequelize.ENUM(['breakfast', 'lunch', 'dinner']),
-    allowNull: false
+  mealType: {
+    type: Sequelize.ENUM(['Breakfast', 'Lunch', 'Dinner', 'Snack'])
+    // allowNull: false
   },
   healthLabels: {
     type: Sequelize.ARRAY(Sequelize.STRING)
   },
   CHOCDF_KCAL: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   FAT_KCAL: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   PROCNT_KCAL: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
+  },
+  calories: {
+    type: Sequelize.FLOAT(4)
   },
   ENERC_KCAL: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   CA: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   CHOCDF: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   FAMS: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   FAPU: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   FASAT: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   FAT: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   FE: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   FOLDFE: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   FOLFD: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   K: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   MG: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   NA: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   NIA: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   P: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   PROCNT: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   RIBF: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   THIA: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   VITB6A: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   WATER: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
   ZN: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT(4)
   },
-  cholesterol: {
-    type: Sequelize.INTEGER
+  CHOLE: {
+    type: Sequelize.FLOAT(4)
   },
-  transfat: {
-    type: Sequelize.INTEGER
+  FATRN: {
+    type: Sequelize.FLOAT(4)
   },
-  fiber: {
-    type: Sequelize.INTEGER
+  FIBTG: {
+    type: Sequelize.FLOAT(4)
   },
-  folicAcid: {
-    type: Sequelize.INTEGER
+  FOLAC: {
+    type: Sequelize.FLOAT(4)
   },
-  sugar: {
-    type: Sequelize.INTEGER
+  SUGAR: {
+    type: Sequelize.FLOAT(4)
   },
-  vitaminE: {
-    type: Sequelize.INTEGER
+  TOCPHA: {
+    type: Sequelize.FLOAT(4)
   },
-  vitaminA: {
-    type: Sequelize.INTEGER
+  VITA_RAE: {
+    type: Sequelize.FLOAT(4)
   },
-  vitaminB12: {
-    type: Sequelize.INTEGER
+  VITB12: {
+    type: Sequelize.FLOAT(4)
   },
-  vitaminC: {
-    type: Sequelize.INTEGER
+  VITC: {
+    type: Sequelize.FLOAT(4)
   },
-  vitaminD: {
-    type: Sequelize.INTEGER
+  VITD: {
+    type: Sequelize.FLOAT(4)
   },
-  vitaminK: {
-    type: Sequelize.INTEGER
+  VITK1: {
+    type: Sequelize.FLOAT(4)
   }
 })
 
