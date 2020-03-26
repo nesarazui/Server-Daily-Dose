@@ -2,6 +2,7 @@ const router = require('express').Router()
 const {UserDish} = require('../db/models')
 const {Dish} = require('../db/models')
 const {Ingredient} = require('../db/models')
+const {DishIngredient} = require('../db/models')
 module.exports = router
 
 // We can only use this route handler once we have login functionality:
@@ -20,32 +21,36 @@ module.exports = router
 //     }
 //   })
 
-// router.get('/dishIngredient/:dishId', async (req, res, next) => {
-//   try {
-//     console.log('GET BY DISH ID')
-//     let dishWithIngredients = await UserDish.findAll({
-//       include: {
-//         model: Dish
-//       },
-//       where: {
-//         userId: 1,
-//         dishId: req.params.dishId
-//       },
-//       include: {
-//         model: DishIngredients, where: {id: id we are passing in}
-//       },
-//     })
-//     if (dishWithIngredients) {
-//       res.json(dishWithIngredients)
-//     } else {
-//       res.status(404).send('Could Not Find Object Requested')
-//     }
-//     console.log('DISH-with-INGREDIENTS-OBJECT: ', dishWithIngredients)
-
-//   } catch (error) {
-//     next(error)
-//   }
-// })
+router.get('/dishIngredient/:dishId/', async (req, res, next) => {
+  try {
+    console.log('GET BY DISH ID')
+    let dishWithIngredients = await UserDish.findAll({
+      include: {
+        model: Dish,
+        include: {
+          model: Ingredient,
+          as: 'DishIngre2',
+          where: {dishId: req.params.dishId}
+          //     include:
+          //       {model: Ingredient}
+        }
+      },
+      where: {
+        userId: 1,
+        dishId: req.params.dishId
+        // date: req.params.date
+      }
+    })
+    if (dishWithIngredients) {
+      res.json(dishWithIngredients)
+    } else {
+      res.status(404).send('Could Not Find Object Requested')
+    }
+    console.log('DISH-with-INGREDIENTS-OBJECT: ', dishWithIngredients)
+  } catch (error) {
+    next(error)
+  }
+})
 
 // const users = await User.findAll({
 //   include: {
