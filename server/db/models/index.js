@@ -2,9 +2,16 @@ const User = require('./user')
 const Dish = require('./dish')
 const Ingredient = require('./ingredient')
 const UserDish = require('./userDish')
+const DishIngredient = require('./DishIngredient')
 
 UserDish.belongsTo(User, {foreignKey: 'userId', through: UserDish})
 UserDish.belongsTo(Dish, {foreignKey: 'dishId', through: UserDish})
+
+DishIngredient.belongsTo(Dish, {foreignKey: 'dishId', through: DishIngredient})
+DishIngredient.belongsTo(Ingredient, {
+  foreignKey: 'ingredientId',
+  through: DishIngredient
+})
 
 // User.belongsToMany(Dish, { through: UserDish}) //'user-dish'
 // Dish.belongsToMany(User, { through: UserDish}) //'user-dish'
@@ -20,5 +27,6 @@ module.exports = {
   User,
   Dish,
   Ingredient,
-  UserDish
+  UserDish,
+  DishIngredient
 }
