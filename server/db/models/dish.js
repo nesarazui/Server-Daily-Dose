@@ -7,12 +7,12 @@ const Dish = db.define('dish', {
     allowNull: false
   },
   imgUrl: {
-    type: Sequelize.TEXT
-    // allowNull: false
+    type: Sequelize.TEXT,
+    allowNull: false
   },
   mealType: {
-    type: Sequelize.ENUM(['Breakfast', 'Lunch', 'Dinner', 'Snack'])
-    // allowNull: false
+    type: Sequelize.ENUM(['Breakfast', 'Lunch', 'Dinner', 'Snack']),
+    allowNull: false
   },
   healthLabels: {
     type: Sequelize.ARRAY(Sequelize.STRING)

@@ -31,15 +31,15 @@ async function seed() {
     Dish.create({
       name: 'Taco', //
       dietaryType: ['dairy-free'],
-      imgUrl: '', //
-      mealTypes: 'lunch', //
+      imgUrl: 'imtheurl', //
+      mealType: 'Lunch', //
       nutrition: 'insert nutrition info here'
     }),
     Dish.create({
       name: 'Chia Seed Pudding', //
       dietaryType: ['dairy-free', 'gluten-free', 'vegan'],
-      imgUrl: '', //
-      mealTypes: 'breakfast', //
+      imgUrl: 'imtheurl', //
+      mealType: 'Breakfast', //
       nutrition: 'insert nutrition info here'
     })
   ])
@@ -54,13 +54,12 @@ async function seed() {
     Ingredient.create({
       ingredientName: 'Chia Seeds', //
       dietType: ['dairy-free', 'gluten-free', 'vegan', 'vegetarian'],
-      foodType: ['seed'],
       nutrition: 'insert nutrition info here',
       portionSize: '4 tbsp' //['4', 'tbsp']
     })
   ])
 
-  const dishIngredients = await Promise.all([
+  await Promise.all([
     DishIngredient.create({
       dishId: 1,
       ingredientId: 1
@@ -71,11 +70,11 @@ async function seed() {
     })
   ])
 
-  const userDishes = await Promise.all([
+  await Promise.all([
     UserDish.create({
       dishId: 1,
       userId: 1,
-      mealTypes: 'breakfast',
+      mealType: 'Breakfast',
       date: 2020 - 10 - 21
     })
   ])
