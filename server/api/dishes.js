@@ -1,6 +1,5 @@
 const router = require('express').Router()
 const {Dish} = require('../db/models')
-const {UserDish} = require('../db/models')
 module.exports = router
 
 router.put('/:id', async (req, res, next) => {
@@ -9,6 +8,7 @@ router.put('/:id', async (req, res, next) => {
       name,
       imgUrl,
       healthLabels,
+      mealType,
       CHOCDF_KCAL,
       FAT_KCAL,
       PROCNT_KCAL,
@@ -52,6 +52,7 @@ router.put('/:id', async (req, res, next) => {
         name,
         imgUrl,
         healthLabels,
+        mealType,
         CHOCDF_KCAL,
         FAT_KCAL,
         PROCNT_KCAL,
@@ -201,7 +202,6 @@ router.post('/', async (req, res, next) => {
       VITK1
     })
     if (newDish) {
-      console.log('oh yeah i made it', newDish)
       res.status(201).json(newDish)
     } else {
       res.status(404).send('Could not create new dish.')
