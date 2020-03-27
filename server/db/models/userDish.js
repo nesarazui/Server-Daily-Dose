@@ -1,7 +1,5 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-const User = require('./user')
-const Dish = require('./dish')
 
 const UserDish = db.define('userDish', {
   id: {
@@ -14,7 +12,9 @@ const UserDish = db.define('userDish', {
     allowNull: false
   },
   date: {
-    type: Sequelize.DATEONLY
+    type: Sequelize.DATEONLY,
+    allowNull: false,
+    defaultValue: new Date()
   }
 })
 

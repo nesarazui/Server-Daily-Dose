@@ -1,5 +1,4 @@
 'use strict'
-
 const db = require('../server/db')
 const {User} = require('../server/db/models')
 const {Dish} = require('../server/db/models')
@@ -61,10 +60,14 @@ async function seed() {
     })
   ])
 
-  const DishIngredients = await Promise.all([
+  const dishIngredients = await Promise.all([
     DishIngredient.create({
       dishId: 1,
       ingredientId: 1
+    }),
+    DishIngredient.create({
+      dishId: 1,
+      ingredientId: 2
     })
   ])
 
