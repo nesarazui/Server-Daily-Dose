@@ -3,25 +3,25 @@ const {Dish} = require('../db/models')
 const {UserDish} = require('../db/models')
 module.exports = router
 
-router.get('/:date', async (req, res, next) => {
-  try {
-    console.log('DOES THIS WORK AT ALL')
-    let dishesByDay = await Dish.findAll({
-      include: {
-        model: UserDish,
-        as: 'User-Dish'
-      },
-      where: {
-        userId: 1,
-        date: req.params.date
-      }
-    })
-    console.log('DISHES ARRAY: ', dishesByDay)
-    res.json(dishesByDay)
-  } catch (error) {
-    next(error)
-  }
-})
+// router.get('/:date', async (req, res, next) => {
+//   try {
+//     console.log('DOES THIS WORK AT ALL')
+//     let dishesByDay = await Dish.findAll({
+//       include: {
+//         model: UserDish,
+//         as: 'User-Dish'
+//       },
+//       where: {
+//         userId: 1,
+//         date: req.params.date
+//       }
+//     })
+//     console.log('DISHES ARRAY: ', dishesByDay)
+//     res.json(dishesByDay)
+//   } catch (error) {
+//     next(error)
+//   }
+// })
 
 router.put('/:id', async (req, res, next) => {
   try {

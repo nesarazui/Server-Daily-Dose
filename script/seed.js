@@ -4,6 +4,8 @@ const db = require('../server/db')
 const {User} = require('../server/db/models')
 const {Dish} = require('../server/db/models')
 const {Ingredient} = require('../server/db/models')
+const {UserDish} = require('../server/db/models')
+const {DishIngredient} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -56,6 +58,22 @@ async function seed() {
       foodType: ['seed'],
       nutrition: 'insert nutrition info here',
       portionSize: '4 tbsp' //['4', 'tbsp']
+    })
+  ])
+
+  const DishIngredients = await Promise.all([
+    DishIngredient.create({
+      dishId: 1,
+      ingredientId: 1
+    })
+  ])
+
+  const userDishes = await Promise.all([
+    UserDish.create({
+      dishId: 1,
+      userId: 1,
+      mealTypes: 'breakfast',
+      date: 2020 - 10 - 21
     })
   ])
 
