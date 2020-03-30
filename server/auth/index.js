@@ -88,7 +88,6 @@ router.put('/editProfile', usersOnly, async (req, res, next) => {
 router.post('/logout', usersOnly, (req, res) => {
   req.logout()
   req.session.destroy()
-  // res.redirect('/')
 })
 
 router.get('/me', (req, res) => {
