@@ -1,8 +1,9 @@
 const router = require('express').Router()
-const User = require('../db/models/user')
+const {User} = require('../db/models')
+const {usersOnly, guestsOnly} = require('./privileges')
 module.exports = router
 
-router.post('/login', async (req, res, next) => {
+router.post('/login', guestsOnly, async (req, res, next) => {
   try {
     const user = await User.findOne({where: {email: req.body.email}})
     if (!user) {
@@ -19,12 +20,30 @@ router.post('/login', async (req, res, next) => {
   }
 })
 
-router.post('/signup', async (req, res, next) => {
+router.post('/signup', guestsOnly, async (req, res, next) => {
   try {
-    const user = await User.create(req.body)
-    req.login(user, err => (err ? next(err) : res.json(user)))
+    const {
+      email,
+      password,
+      name,
+      sex,
+      dietaryPreference,
+      birthdate,
+      height,
+      weight
+    } = req.body
+    const newUser = await User.create({
+      email,
+      password,
+      name,
+      sex,
+      dietaryPreference,
+      birthdate,
+      height,
+      weight
+    })
   } catch (err) {
-    if (err.name === 'SequelizeUniqueConstraintError') {
+    if (err.email === 'SequelizeUniqueConstraintError') {
       res.status(401).send('User already exists')
     } else {
       next(err)
@@ -32,10 +51,43 @@ router.post('/signup', async (req, res, next) => {
   }
 })
 
-router.post('/logout', (req, res) => {
+router.put('/editProfile', usersOnly, async (req, res, next) => {
+  try {
+    const user = req.user
+    const {
+      email,
+      password,
+      name,
+      sex,
+      dietaryPreference,
+      birthdate,
+      height,
+      weight
+    } = req.body
+
+    if (user) {
+      const updatedUser = await user.update({
+        email,
+        password,
+        name,
+        sex,
+        dietaryPreference,
+        birthdate,
+        height,
+        weight
+      })
+      res.status(200).json(updatedUser)
+    } else {
+      res.status(404).send('User not found.')
+    }
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.post('/logout', usersOnly, (req, res) => {
   req.logout()
   req.session.destroy()
-  res.redirect('/')
 })
 
 router.get('/me', (req, res) => {
