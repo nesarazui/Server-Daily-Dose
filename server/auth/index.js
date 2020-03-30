@@ -91,6 +91,7 @@ router.post('/logout', usersOnly, (req, res) => {
 })
 
 router.get('/me', (req, res) => {
+  console.log('IS THIS WORKING????????', req.user)
   res.json(req.user)
 })
 

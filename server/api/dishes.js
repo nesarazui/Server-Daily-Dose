@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Dish, Ingredient} = require('../db/models')
+const {Dish, Ingredient, UserDish} = require('../db/models')
 module.exports = router
 
 router.put('/:id', async (req, res, next) => {
@@ -205,6 +205,14 @@ router.post('/', async (req, res, next) => {
       let newIngredient = await Ingredient.create(ingredient)
       await newDish.addIngredient(newIngredient)
     })
+
+    const newUserDish = {
+      mealType: req.body.dish.mealType,
+      userId: req.user.id,
+      dishId: newDish.id
+    }
+    await UserDish.create(newUserDish)
+
     if (newDish) {
       res.status(201).json(newDish)
     } else {
