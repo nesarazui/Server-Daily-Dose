@@ -41,3 +41,19 @@ router.get('/:date', async (req, res, next) => {
     next(error)
   }
 })
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id
+    const itemToDelete = await UserDish.findByPk(id)
+    console.log('what was Item To Delete? ', itemToDelete)
+    if (itemToDelete) {
+      await itemToDelete.destroy()
+      res.json(itemToDelete)
+    } else {
+      res.status(404).send('Could Not Find Instance to Delete')
+    }
+  } catch (error) {
+    next(error)
+  }
+})
