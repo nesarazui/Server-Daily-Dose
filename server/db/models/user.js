@@ -32,15 +32,7 @@ const User = db.define('user', {
     allowNull: false
   },
   dietaryPreference: {
-    type: Sequelize.ENUM([
-      'vegetarian',
-      'vegan',
-      'gluten-free',
-      'dairy-free',
-      'paleo',
-      'keto',
-      'pescatarian'
-    ])
+    type: Sequelize.ARRAY(Sequelize.STRING)
   },
   birthdate: {
     type: Sequelize.DATE
