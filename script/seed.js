@@ -24,6 +24,34 @@ async function seed() {
       name: 'Murphy',
       sex: 'male',
       dietaryPreference: ['keto']
+    }),
+    User.create({
+      email: 'Emma@email.com',
+      password: '123',
+      name: 'Emma',
+      sex: 'female',
+      dietaryPreference: ['vegan']
+    }),
+    User.create({
+      email: 'Sooin@email.com',
+      password: '123',
+      name: 'Sooin',
+      sex: 'female',
+      dietaryPreference: ['keto']
+    }),
+    User.create({
+      email: 'Nesara@email.com',
+      password: '123',
+      name: 'Nesara',
+      sex: 'female',
+      dietaryPreference: ['vegan']
+    }),
+    User.create({
+      email: 'Jane@email.com',
+      password: '123',
+      name: 'Jane',
+      sex: 'female',
+      dietaryPreference: ['keto']
     })
   ])
 
