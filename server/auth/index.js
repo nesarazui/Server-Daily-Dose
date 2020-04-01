@@ -85,13 +85,18 @@ router.put('/editProfile', usersOnly, async (req, res, next) => {
   }
 })
 
-router.post('/logout', usersOnly, (req, res) => {
-  req.logout()
-  req.session.destroy()
+router.post('/logout', (req, res) => {
+  try {
+    req.logout()
+    req.session.destroy()
+    res.sendStatus(200)
+  } catch (error) {
+    console.error(error)
+  }
 })
 
 router.get('/me', (req, res) => {
-  console.log('IS THIS WORKING????????', req.user)
+  console.log('hi it me')
   res.json(req.user)
 })
 
