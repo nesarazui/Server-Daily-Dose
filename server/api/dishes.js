@@ -206,11 +206,14 @@ router.post('/', async (req, res, next) => {
       await newDish.addIngredient(newIngredient)
     })
 
+    const dateToSave = new Date()
     const newUserDish = {
       mealType: req.body.dish.mealType,
       userId: req.user.id,
-      dishId: newDish.id
+      dishId: newDish.id,
+      date: dateToSave
     }
+
     await UserDish.create(newUserDish)
 
     if (newDish) {
