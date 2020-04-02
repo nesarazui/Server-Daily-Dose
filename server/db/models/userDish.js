@@ -12,7 +12,7 @@ const UserDish = db.define('userDish', {
     allowNull: false
   },
   date: {
-    type: Sequelize.DATEONLY,
+    type: Sequelize.DATE,
     allowNull: false,
     defaultValue: new Date()
   }
