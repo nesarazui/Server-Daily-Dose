@@ -27,6 +27,7 @@ router.get('/dishIngredient/:dishId/', async (req, res, next) => {
 
 router.get('/:date', async (req, res, next) => {
   try {
+    console.log('im the req.user', req.user)
     let dishesByDay = await UserDish.findAll({
       include: {
         model: Dish
@@ -36,6 +37,7 @@ router.get('/:date', async (req, res, next) => {
         date: req.params.date
       }
     })
+    console.log('im the dishes', dishesByDay)
     res.json(dishesByDay)
   } catch (error) {
     next(error)
