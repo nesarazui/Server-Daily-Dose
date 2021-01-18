@@ -98,8 +98,11 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/me', (req, res) => {
-  console.log('hi it me')
-  res.json(req.user)
+  try {
+    res.json(req.user)
+  } catch (e) {
+    console.log(e)
+  }
 })
 
 router.use('/google', require('./google'))
