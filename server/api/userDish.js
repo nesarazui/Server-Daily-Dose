@@ -27,7 +27,7 @@ router.get('/dishIngredient/:dishId/', async (req, res, next) => {
 
 router.get('/:date', async (req, res, next) => {
   try {
-    console.log('im the req.user', req.user)
+    // console.log('im the req.params', req.params.date)
     let dishesByDay = await UserDish.findAll({
       include: {
         model: Dish
@@ -37,7 +37,7 @@ router.get('/:date', async (req, res, next) => {
         date: req.params.date
       }
     })
-    console.log('im the dishes', dishesByDay)
+    //console.log('im the dishes', dishesByDay)
     res.json(dishesByDay)
   } catch (error) {
     next(error)
@@ -48,7 +48,7 @@ router.delete('/:id', async (req, res, next) => {
   try {
     const id = req.params.id
     const itemToDelete = await UserDish.findByPk(id)
-    console.log('what was Item To Delete? ', itemToDelete)
+    //console.log('what was Item To Delete? ', itemToDelete)
     if (itemToDelete) {
       await itemToDelete.destroy()
       res.json(itemToDelete)
