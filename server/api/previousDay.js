@@ -16,9 +16,8 @@ router.get('/:date', async (req, res, next) => {
       }
     })
     let calorieCount = sendCalorieCount(dishesForYesterday)
-    let workouts = sendWorkout(calorieCount.calories)
-    let workoutDebtData = {workouts, calorieCount}
-
+    let workoutCalculations = workoutDebtCalculator(calorieCount)
+    let workoutDebtData = {calorieCount, workoutCalculations}
     res.json(workoutDebtData)
   } catch (error) {
     next(error)
@@ -26,61 +25,44 @@ router.get('/:date', async (req, res, next) => {
 })
 
 function sendCalorieCount(obj) {
-  let calData = {fatKcal: 0, calories: 0, chocdfKcal: 0}
+  let calData = {fat: 0, protein: 0, carbs: 0}
   obj.forEach(dishObj => {
-    calData.fatKcal += dishObj.dish.FAT_KCAL
-    calData.calories += dishObj.dish.calories
-    calData.chocdfKcal += dishObj.dish.CHOCDF_KCAL
+    calData.fat += dishObj.dish.FAT_KCAL
+    calData.protein += dishObj.dish.PROCNT_KCAL
+    calData.carbs += dishObj.dish.CHOCDF_KCAL
   })
   return calData
 }
 
-function sendWorkout(cals) {
-  const recommendedWorkout = []
-  let intensityLevel = 1
+function workoutDebtCalculator(calorieCount) {
+  let totalWorkoutTime = 0
+  let maxHeartRate = 0
+  const workouts = ['running', 'elliptical', 'swimming', 'cycling']
+  const percentHeartRateMap = {fat: 75, carbs: 85, protein: 65, fatAndCarb: 80}
+  let heartRatesToCalc = []
 
-  const chart = [
-    {
-      name: 'Swim',
-      1: {min: 15, miles: 0.5}, //lowest intensity
-      2: {min: 25, miles: 1}, //medium intensity
-      3: {min: 35, miles: 1.5}, //high intensity
-      4: {min: 45, miles: 2} //highest intensity
-    },
-    {
-      name: 'Elliptical',
-      1: {min: 15, miles: 0.5},
-      2: {min: 25, miles: 1},
-      3: {min: 35, miles: 1.5},
-      4: {min: 45, miles: 2}
-    },
-    {
-      name: 'Run',
-      1: {min: 15, miles: 0.5},
-      2: {min: 25, miles: 1},
-      3: {min: 35, miles: 1.5},
-      4: {min: 45, miles: 2}
+  if (calorieCount.fat > 0 && calorieCount.carbs > 0) {
+    let combinedFatCarb = (calorieCount.carbs + calorieCount.fat) / 100 * 15
+    totalWorkoutTime += combinedFatCarb
+    if (calorieCount.protein > 0) {
+      totalWorkoutTime += calorieCount.protein / 100 * 10
     }
-  ]
-
-  if (cals <= 500) {
-    intensityLevel = 1
-  } else if (cals > 500 && cals <= 1200) {
-    intensityLevel = 2
-  } else if (cals > 1200 && cals <= 1800) {
-    intensityLevel = 3
-  } else if (cals > 1800 && cals <= 2400) {
-    intensityLevel = 3
+    maxHeartRate = percentHeartRateMap.fatAndCarb
   } else {
-    intensityLevel = 4
+    // eslint-disable-next-line guard-for-in
+    for (let cal in calorieCount) {
+      let num = calorieCount[cal]
+      if (num > 0) {
+        totalWorkoutTime += num / 100 * 10
+        heartRatesToCalc.push(percentHeartRateMap[cal])
+      }
+    }
+    let sortedHeartRates = heartRatesToCalc.sort()
+    let median = Math.floor(sortedHeartRates.length / 2)
+    maxHeartRate = sortedHeartRates[median]
   }
 
-  chart.forEach(workout => {
-    let obj = {}
-    obj.name = workout.name
-    obj.min = workout[intensityLevel].min
-    obj.miles = workout[intensityLevel].miles
-    recommendedWorkout.push(obj)
-  })
-  return recommendedWorkout
+  totalWorkoutTime = Math.ceil(totalWorkoutTime)
+  let calculations = {totalWorkoutTime, maxHeartRate, workouts}
+  return calculations
 }
