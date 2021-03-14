@@ -1,8 +1,17 @@
 const router = require('express').Router()
 const {UserDish} = require('../db/models')
 const {Dish} = require('../db/models')
-const {Ingredient} = require('../db/models')
 module.exports = router
+
+router.post('/singleDish', async (req, res, next) => {
+  try {
+    const caloriesForSingleDish = req.body
+    const workoutDebtForSingleDish = getWorkoutDebt(caloriesForSingleDish)
+    res.json(workoutDebtForSingleDish)
+  } catch (error) {
+    next(error)
+  }
+})
 
 router.get('/:date', async (req, res, next) => {
   try {
@@ -16,9 +25,8 @@ router.get('/:date', async (req, res, next) => {
       }
     })
     let calorieCount = sendCalorieCount(dishesForYesterday)
-    let workoutCalculations = workoutDebtCalculator(calorieCount)
-    let workoutDebtData = {calorieCount, workoutCalculations}
-    res.json(workoutDebtData)
+    let workoutDebtForDay = getWorkoutDebt(calorieCount)
+    res.json(workoutDebtForDay)
   } catch (error) {
     next(error)
   }
@@ -34,7 +42,7 @@ function sendCalorieCount(obj) {
   return calData
 }
 
-function workoutDebtCalculator(calorieCount) {
+const getWorkoutDebt = calorieCount => {
   let totalWorkoutTime = 0
   let maxHeartRate = 0
   const workouts = ['running', 'elliptical', 'swimming', 'cycling']
@@ -63,6 +71,7 @@ function workoutDebtCalculator(calorieCount) {
   }
 
   totalWorkoutTime = Math.ceil(totalWorkoutTime)
-  let calculations = {totalWorkoutTime, maxHeartRate, workouts}
-  return calculations
+  let workoutCalculations = {totalWorkoutTime, maxHeartRate, workouts}
+  let workoutDebtData = {calorieCount, workoutCalculations}
+  return workoutDebtData
 }
